@@ -51,12 +51,12 @@ uEye can help you answer these and other questions without relying on third-part
 	</script>
 	```
 
-2. Create a page on the server which can load the player and the stored log, for example `/ueye-player?log=12345`:
+2. Create a page on the server which can load the player and the stored log, for example `/ueye/player.php?log=12345`:
 
 	```html
 	<script src="/ueye/player.js"></script>
 	<script>
-		// barf the json log here (or do a secondary ajax request to fetch it)
+		// barf the stored json log here (or do a secondary ajax request to fetch it)
 		var log = <?= $log12345 ?>;
 
 		// create player
