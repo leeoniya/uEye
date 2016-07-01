@@ -30,7 +30,44 @@ uEye can help you answer these and other questions without relying on third-part
 	- [alite](https://github.com/chrisdavies/alite) for ajax
 
 ---
-#### Usage
+#### Basic Usage
+
+1. On any page you want to record...
+
+	```html
+	<script src="recorder.js"></script>
+	<script>
+		// start recording
+		var rec = new uEye.recorder();
+		rec.record();
+
+		// ajax post log to server before page unload
+		window.addEventListener("beforeunload", function(e) {
+			var req = new XMLHttpRequest();
+			req.open("POST", "/uilogs");
+			req.setRequestHeader("Content-Type", "application/json");
+			req.send(JSON.stringify(rec.log));
+		});
+	</script>
+	```
+
+2. Create a page on the server which can load the player and the stored log, for example `/ueye-player?log=12345`:
+
+	```html
+	<script src="player.js"></script>
+	<script>
+		// barf the json log here (or do a secondary ajax request to fetch it)
+		var log = <?= $log12345 ?>;
+
+		// create player
+		var ply = new uEye.player(log);
+
+		// start playback
+		ply.play();
+	</script>
+	```
+
+3. Optionally, use the example [playback & timeline controls]("/") rather than controlling the player through its API
 
 ---
 #### Demos
