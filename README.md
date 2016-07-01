@@ -35,7 +35,7 @@ uEye can help you answer these and other questions without relying on third-part
 1. On any page you want to record...
 
 	```html
-	<script src="recorder.js"></script>
+	<script src="/ueye/recorder.js"></script>
 	<script>
 		// start recording
 		var rec = new uEye.recorder();
@@ -54,13 +54,13 @@ uEye can help you answer these and other questions without relying on third-part
 2. Create a page on the server which can load the player and the stored log, for example `/ueye-player?log=12345`:
 
 	```html
-	<script src="player.js"></script>
+	<script src="/ueye/player.js"></script>
 	<script>
 		// barf the json log here (or do a secondary ajax request to fetch it)
 		var log = <?= $log12345 ?>;
 
 		// create player
-		var ply = new uEye.player(log);
+		var ply = new uEye.player(log, {css: "/ueye/ueye.css"});
 
 		// start playback
 		ply.play();
